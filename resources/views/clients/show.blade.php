@@ -219,13 +219,10 @@
 
                 @if ($client->location)
                     <div class="md:col-span-2">
-                        <dt class="font-semibold text-gray-700 dark:text-gray-300">Social Account Issues</dt>
-                        <div class="mt-1">
-                            <strong class="capitalize">Google Map: </strong>
-                            <span class="whitespace-pre-wrap text-blue-600 dark:text-blue-400">
-                                <a href="{{ $client->location }}">Visit</a>
-                            </span>
-                        </div>
+                        <dt class="font-semibold text-gray-700 dark:text-gray-300">Google Map:</dt>
+                        <span class="whitespace-pre-wrap text-blue-600 dark:text-blue-400">
+                            <a href="{{ $client->location }}">Visit</a>
+                        </span>
                     </div>
                 @endif
 
