@@ -46,6 +46,14 @@
                         @enderror
                     </div>
                     <div>
+                        <label class="block text-gray-700 dark:text-gray-300">Address</label>
+                        <input type="text" name="address" value="{{ old('address') }}"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
+                        @error('address')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
                         <label class="block text-gray-700 dark:text-gray-300">Type</label>
                         <input type="text" name="type" value="{{ old('type') }}"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />

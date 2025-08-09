@@ -34,7 +34,7 @@
                     <dt class="font-semibold text-gray-700 dark:text-gray-300">Website Exists</dt>
                     <dd class="mt-1 text-gray-900 dark:text-gray-100">{{ $client->website_exists ? 'Yes' : 'No' }}</dd>
                 </div>
-                @if($client->website_exists)
+                @if ($client->website_exists)
                 <div>
                     <dt class="font-semibold text-gray-700 dark:text-gray-300">Website</dt>
                     <dd class="mt-1">
@@ -46,11 +46,11 @@
                     <dt class="font-semibold text-gray-700 dark:text-gray-300">Social Accounts Exists</dt>
                     <dd class="mt-1 text-gray-900 dark:text-gray-100">{{ $client->social_accounts_exists ? 'Yes' : 'No' }}</dd>
                 </div>
-                @if($client->social_accounts_exists && $client->social_accounts)
+                @if ($client->social_accounts_exists && $client->social_accounts)
                 <div class="md:col-span-2">
                     <dt class="font-semibold text-gray-700 dark:text-gray-300">Social Accounts</dt>
                     <dd class="mt-1 space-y-1">
-                        @foreach($client->social_accounts as $platform => $link)
+                        @foreach ($client->social_accounts as $platform => $link)
                             <div>
                                 <strong class="capitalize">{{ $platform }}:</strong>
                                 <a href="{{ $link }}" target="_blank" class="text-blue-600 hover:underline dark:text-blue-400">{{ $link }}</a>
@@ -59,10 +59,10 @@
                     </dd>
                 </div>
                 @endif
-                @if($client->website_issues)
+                @if ($client->website_issues)
                 <div class="md:col-span-2">
                     <dt class="font-semibold text-gray-700 dark:text-gray-300">Website Issues</dt>
-                    @foreach($client->website_issues as $index => $issue)
+                    @foreach ($client->website_issues as $index => $issue)
                     <div class="mt-1">
                                 <strong class="capitalize">{{ $index }}:</strong>
                                 <span class="whitespace-pre-wrap text-red-600 dark:text-red-400">{{ $issue }}</span>
@@ -70,7 +70,7 @@
                     @endforeach
                 </div>
                 @endif
-                @if($client->social_account_issues)
+                @if ($client->social_account_issues)
                 <div class="md:col-span-2">
                     <dt class="font-semibold text-gray-700 dark:text-gray-300">Social Account Issues</dt>
                     <dd class="mt-1">
@@ -131,15 +131,15 @@
             @php
                 $fields = [
                     'business_owner' => 'Business Owner',
-                    'email'          => 'Email',
-                    'contact'        => 'Contact',
-                    'address'        => 'Address',
-                    'type'           => 'Type',
+                    'email' => 'Email',
+                    'contact' => 'Contact',
+                    'address' => 'Address',
+                    'type' => 'Type',
                     'website_exists' => 'Website Exists',
                     'social_accounts_exists' => 'Social Accounts Exists',
-                    'audit_summary'  => 'Audit Summary',
-                    'notes'          => 'Notes',
-                    'follow_up_dates'=> 'Follow Up Date',
+                    'audit_summary' => 'Audit Summary',
+                    'notes' => 'Notes',
+                    'follow_up_dates' => 'Follow Up Date',
                 ];
                 $statusLabels = ['Pending', 'In Progress', 'Completed', 'Cancelled'];
                 $statusColors = ['text-gray-500', 'text-yellow-500', 'text-green-500', 'text-red-500'];
@@ -147,11 +147,11 @@
             @endphp
 
             <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-                @foreach($fields as $key => $label)
+                @foreach ($fields as $key => $label)
                     <div class="{{ in_array($key, ['audit_summary', 'notes']) ? 'md:col-span-2' : '' }}">
                         <dt class="font-semibold text-gray-700 dark:text-gray-300">{{ $label }}</dt>
                         <dd class="mt-1 text-gray-900 dark:text-gray-100">
-                            @if(is_bool($client->$key) || $key === 'website_exists' || $key === 'social_accounts_exists')
+                            @if (is_bool($client->$key) || $key === 'website_exists' || $key === 'social_accounts_exists')
                                 {{ $client->$key ? 'Yes' : 'No' }}
                             @else
                                 {{ $client->$key ?? '-' }}
@@ -161,11 +161,12 @@
                 @endforeach
 
                 {{-- Website link if exists --}}
-                @if($client->website_exists && $client->website)
+                @if ($client->website_exists && $client->website)
                     <div>
                         <dt class="font-semibold text-gray-700 dark:text-gray-300">Website</dt>
                         <dd class="mt-1">
-                            <a href="{{ $client->website }}" target="_blank" class="text-blue-600 hover:underline dark:text-blue-400">
+                            <a href="{{ $client->website }}" target="_blank"
+                                class="text-blue-600 hover:underline dark:text-blue-400">
                                 {{ $client->website }}
                             </a>
                         </dd>
@@ -173,14 +174,15 @@
                 @endif
 
                 {{-- Social accounts list if exists --}}
-                @if($client->social_accounts_exists && $client->social_accounts)
+                @if ($client->social_accounts_exists && $client->social_accounts)
                     <div class="md:col-span-2">
                         <dt class="font-semibold text-gray-700 dark:text-gray-300">Social Accounts</dt>
                         <dd class="mt-1 space-y-1">
-                            @foreach($client->social_accounts as $platform => $link)
+                            @foreach ($client->social_accounts as $platform => $link)
                                 <div>
                                     <strong class="capitalize">{{ $platform }}:</strong>
-                                    <a href="{{ $link }}" target="_blank" class="text-blue-600 hover:underline dark:text-blue-400">{{ $link }}</a>
+                                    <a href="{{ $link }}" target="_blank"
+                                        class="text-blue-600 hover:underline dark:text-blue-400">{{ $link }}</a>
                                 </div>
                             @endforeach
                         </dd>
@@ -188,28 +190,42 @@
                 @endif
 
                 {{-- Website issues --}}
-                @if($client->website_issues)
+                @if ($client->website_issues)
                     <div class="md:col-span-2">
                         <dt class="font-semibold text-gray-700 dark:text-gray-300">Website Issues</dt>
-                        @foreach($client->website_issues as $index => $issue)
+                        @foreach ($client->website_issues as $index => $issue)
                             <div class="mt-1">
                                 <strong class="capitalize">{{ $index }}:</strong>
-                                <span class="whitespace-pre-wrap text-red-600 dark:text-red-400">{{ $issue }}</span>
+                                <span
+                                    class="whitespace-pre-wrap text-red-600 dark:text-red-400">{{ $issue }}</span>
                             </div>
                         @endforeach
                     </div>
                 @endif
 
                 {{-- Social account issues --}}
-                @if($client->social_account_issues)
+                @if ($client->social_account_issues)
                     <div class="md:col-span-2">
                         <dt class="font-semibold text-gray-700 dark:text-gray-300">Social Account Issues</dt>
-                        @foreach($client->social_account_issues as $index => $issue)
+                        @foreach ($client->social_account_issues as $index => $issue)
                             <div class="mt-1">
                                 <strong class="capitalize">{{ $index }}:</strong>
-                                <span class="whitespace-pre-wrap text-red-600 dark:text-red-400">{{ $issue }}</span>
+                                <span
+                                    class="whitespace-pre-wrap text-red-600 dark:text-red-400">{{ $issue }}</span>
                             </div>
                         @endforeach
+                    </div>
+                @endif
+
+                @if ($client->location)
+                    <div class="md:col-span-2">
+                        <dt class="font-semibold text-gray-700 dark:text-gray-300">Social Account Issues</dt>
+                        <div class="mt-1">
+                            <strong class="capitalize">Google Map: </strong>
+                            <span class="whitespace-pre-wrap text-blue-600 dark:text-blue-400">
+                                <a href="{{ $client->location }}">Visit</a>
+                            </span>
+                        </div>
                     </div>
                 @endif
 
@@ -224,11 +240,11 @@
 
             <div class="mt-6 flex justify-end space-x-3">
                 <a href="{{ route('clients.index') }}"
-                   class="px-4 py-2 rounded-md bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-400 dark:hover:bg-gray-600 focus:outline-none">
+                    class="px-4 py-2 rounded-md bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-400 dark:hover:bg-gray-600 focus:outline-none">
                     Back
                 </a>
                 <a href="{{ route('clients.edit', $client->id) }}"
-                   class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 focus:outline-none">
+                    class="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 focus:outline-none">
                     Edit
                 </a>
             </div>
