@@ -15,28 +15,43 @@
                     <div>
                         <label class="block text-gray-700 dark:text-gray-300">Business Name <span
                                 class="text-red-500">*</span></label>
-                        <input type="text" name="business_name" required
+                        <input type="text" name="business_name" required value="{{ old('business_name') }}"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
+                        @error('business_name')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-gray-700 dark:text-gray-300">Business Owner</label>
-                        <input type="text" name="business_owner"
+                        <input type="text" name="business_owner" value="{{ old('business_owner') }}"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
+                        @error('business_owner')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-gray-700 dark:text-gray-300">Email</label>
-                        <input type="email" name="email"
+                        <input type="email" name="email" value="{{ old('email') }}"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
+                        @error('email')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-gray-700 dark:text-gray-300">Contact</label>
-                        <input type="text" name="contact"
+                        <input type="text" name="contact" value="{{ old('contact') }}"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
+                        @error('contact')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-gray-700 dark:text-gray-300">Type</label>
-                        <input type="text" name="type"
+                        <input type="text" name="type" value="{{ old('type') }}"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
+                        @error('type')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="flex items-center space-x-4">
@@ -54,26 +69,38 @@
 
                     <div>
                         <label class="block text-gray-700 dark:text-gray-300">Website URL</label>
-                        <input type="url" name="website"
+                        <input type="url" name="website" value="{{ old('website') }}"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
+                        @error('website')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
                         <label class="block text-gray-700 dark:text-gray-300">Google Maps URL</label>
-                        <input type="url" name="location"
+                        <input type="url" name="location" value="{{ old('location') }}"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
+                        @error('location')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
                         <label class="block text-gray-700 dark:text-gray-300">Follow-up Date</label>
-                        <input type="date" name="follow_up_dates"
+                        <input type="date" name="follow_up_dates" value="{{ old('follow_up_dates') ?? today()->addWeek()->format('Y-m-d') }}"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
+                        @error('follow_up_dates')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
                         <label class="block text-gray-700 dark:text-gray-300">Notes</label>
                         <textarea name="notes" rows="3"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50"></textarea>
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50">{{ old('notes') }}</textarea>
+                        @error('notes')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
@@ -100,6 +127,9 @@
                                 + Add Social Account
                             </button>
                         </div>
+                        @error('social_accounts')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
@@ -126,6 +156,9 @@
                                 + Add Issues on Website
                             </button>
                         </div>
+                        @error('issues_on_website')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
@@ -152,6 +185,9 @@
                                 + Add Issues on Social Account
                             </button>
                         </div>
+                        @error('issues_on_social_accounts')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
 
