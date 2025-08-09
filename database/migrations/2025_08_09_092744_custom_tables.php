@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('audit_summary')->nullable();
             $table->string('notes')->nullable();
             $table->date('follow_up_dates')->nullable();
-            $table->string('location')->nullable();
+            $table->text('location')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
             $table->foreign('added_by')->on('users')->references('id');
