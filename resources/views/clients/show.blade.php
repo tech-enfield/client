@@ -204,9 +204,12 @@
                 @if($client->social_account_issues)
                     <div class="md:col-span-2">
                         <dt class="font-semibold text-gray-700 dark:text-gray-300">Social Account Issues</dt>
-                        <dd class="mt-1">
-                            <pre class="whitespace-pre-wrap text-red-600 dark:text-red-400">{{ json_encode($client->social_account_issues, JSON_PRETTY_PRINT) }}</pre>
-                        </dd>
+                        @foreach($client->social_account_issues as $index => $issue)
+                            <div class="mt-1">
+                                <strong class="capitalize">{{ $index }}:</strong>
+                                <span class="whitespace-pre-wrap text-red-600 dark:text-red-400">{{ $issue }}</span>
+                            </div>
+                        @endforeach
                     </div>
                 @endif
 
