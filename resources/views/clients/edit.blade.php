@@ -126,8 +126,19 @@
 
                     <div>
                         <label class="block text-gray-700 dark:text-gray-300">Status</label>
-                        <input type="text" name="status" value="{{ old('status', $client->status) ?? 'Pending' }}" placeholder="Pending"
-                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
+                        <select name="status"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                            @php
+                                $statuses = ['Pending', 'In Progress', 'Waiting Client', 'Completed', 'Cancelled'];
+                            @endphp
+
+                            @foreach ($statuses as $status)
+                                <option value="{{ $status }}"
+                                    {{ old('status', $client->status) === $status ? 'selected' : '' }}>
+                                    {{ $status }}
+                                </option>
+                            @endforeach
+                        </select>
                         @error('status')
                             <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                         @enderror

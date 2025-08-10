@@ -141,8 +141,8 @@
                     'notes' => 'Notes',
                     'follow_up_dates' => 'Follow Up Date',
                 ];
-                $statusLabels = ['Pending', 'In Progress', 'Completed', 'Cancelled'];
-                $statusColors = ['text-gray-500', 'text-yellow-500', 'text-green-500', 'text-red-500'];
+                $statusLabels = ['Pending', 'In Progress', 'Waiting Client', 'Completed', 'Cancelled'];
+                $statusColors = ['text-gray-500', 'text-blue-500', 'text-orange-500', 'text-green-500', 'text-red-500'];
                 $status = $client->status ?? 0;
             @endphp
 
