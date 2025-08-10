@@ -112,7 +112,7 @@ class DashboardController extends Controller
             'website_exists' => 'nullable',
             'social_accounts_exists' => 'nullable',
             'website' => 'nullable|url',
-            'location' => 'nullable|url|unique:clients,location',
+            'location' => 'nullable|url|unique:clients,location,' . $client->id,
             'follow_up_dates' => 'nullable|date',
             'notes' => 'nullable|string',
             'social_accounts' => 'nullable|array',
