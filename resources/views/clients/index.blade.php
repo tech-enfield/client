@@ -84,14 +84,15 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center">
                                         @php
-                                            $statusColors = [
-                                                0 => 'text-gray-500',
-                                                1 => 'text-yellow-500',
-                                                2 => 'text-green-500',
-                                                3 => 'text-red-500',
-                                            ];
+                                            // $statusColors = [
+                                            //     0 => 'text-gray-500',
+                                            //     1 => 'text-yellow-500',
+                                            //     2 => 'text-green-500',
+                                            //     3 => 'text-red-500',
+                                            // ];
+                                            $statusColors = ['text-gray-500', 'text-blue-500', 'text-orange-500', 'text-green-500', 'text-red-500'];
                                         @endphp
-                                        <span class="{{ $statusColors[$client->status] ?? 'text-gray-500' }}">
+                                        <span class="{{ $statusColors[$client->status ? $client->status - 1 : 0] ?? 'text-gray-500' }}">
                                             {{ ['Pending', 'In Progress', 'Waiting Client', 'Completed', 'Cancelled'][$client->status ? $client->status - 1 : 0] ?? 'Unknown' }}
                                         </span>
                                     </td>
