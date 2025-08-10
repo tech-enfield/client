@@ -47,7 +47,7 @@ class DashboardController extends Controller
             'social_accounts' => 'nullable|array',
             'issues_on_website' => 'nullable|array',
             'issues_on_social_accounts' => 'nullable|array',
-            'status' => 'nullable|in:Pending,In Progress,Waiting Client,Completed,Cancelled'
+            'status' => 'nullable'
         ]);
 
         $data = $request->only([
@@ -120,7 +120,7 @@ class DashboardController extends Controller
             'social_accounts' => 'nullable|array',
             'issues_on_website' => 'nullable|array',
             'issues_on_social_accounts' => 'nullable|array',
-            'status' => 'nullable|in:Pending,In Progress,Waiting Client,Completed,Cancelled'
+            'status' => 'nullable'
         ]);
 
         $data = $request->only([

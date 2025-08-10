@@ -129,13 +129,19 @@
                         <select name="status"
                             class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                             @php
-                                $statuses = ['Pending', 'In Progress', 'Waiting Client', 'Completed', 'Cancelled'];
+                                $statuses = [
+                                    1 => 'Pending',
+                                    2 => 'In Progress',
+                                    3 => 'Waiting Client',
+                                    4 => 'Completed',
+                                    5 => 'Cancelled',
+                                ];
                             @endphp
 
-                            @foreach ($statuses as $status)
-                                <option value="{{ $status }}"
-                                    {{ old('status', $client->status) === $status ? 'selected' : '' }}>
-                                    {{ $status }}
+                            @foreach ($statuses as $value => $label)
+                                <option value="{{ $value }}"
+                                    {{ old('status', $client->status ?? 1) == $value ? 'selected' : '' }}>
+                                    {{ $label }}
                                 </option>
                             @endforeach
                         </select>
