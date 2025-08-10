@@ -92,7 +92,7 @@
                                             ];
                                         @endphp
                                         <span class="{{ $statusColors[$client->status] ?? 'text-gray-500' }}">
-                                            {{ ['Pending', 'In Progress', 'Completed', 'Cancelled'][$client->status] ?? 'Unknown' }}
+                                            {{ ['Pending', 'In Progress', 'Waiting Client', 'Completed', 'Cancelled'][$client->status ? $client->status - 1 : 0] ?? 'Unknown' }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
