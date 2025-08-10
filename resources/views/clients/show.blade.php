@@ -143,7 +143,7 @@
                 ];
                 $statusLabels = ['Pending', 'In Progress', 'Waiting Client', 'Completed', 'Cancelled'];
                 $statusColors = ['text-gray-500', 'text-blue-500', 'text-orange-500', 'text-green-500', 'text-red-500'];
-                $status = $client->status ?? 0;
+                $status = $client->status ? $client->status - 1 : 0;
             @endphp
 
             <dl class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
