@@ -4,7 +4,7 @@
             {{ __('Edit Client') }}
         </h2>
     </x-slot>
-
+    {{-- @dd($client) --}}
     <div class="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div
             class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900 dark:text-gray-100">
@@ -22,7 +22,7 @@
 
             <form method="POST" action="{{ route('clients.update', $client->id) }}">
                 @csrf
-                @method('PUT')
+                @method('PATCH')
 
                 <div class="space-y-4">
                     {{-- Business Name --}}
@@ -232,13 +232,37 @@
     <script>
         function socialAccountsManager() {
             return {
-                accounts: @json(old('social_accounts', $client->social_accounts ?? [['platform' => 'Facebook', 'url' => '']])),
+                accounts: [
+                    // Pre-fill with old or existing data if available, else empty example
+                    @if (old('social_accounts'))
+                        @foreach (old('social_accounts') as $platform => $url)
+                            {
+                                platform: '{{ $platform }}',
+                                url: '{{ $url }}'
+                            },
+                        @endforeach
+                    @elseif (isset($client) && $client->social_accounts)
+                        @foreach ($client->social_accounts as $platform => $url)
+                            {
+                                platform: '{{ $platform }}',
+                                url: '{{ $url }}'
+                            },
+                        @endforeach
+                    @else
+                        {
+                            platform: 'Facebook',
+                            url: ''
+                        }
+                    @endif
+                ],
+
                 addAccount() {
                     this.accounts.push({
                         platform: '',
                         url: ''
                     });
                 },
+
                 removeAccount(index) {
                     this.accounts.splice(index, 1);
                 }
@@ -247,13 +271,37 @@
 
         function socialAccountsIssueManager() {
             return {
-                accounts: @json(old('issues_on_social_accounts', $client->social_account_issues ?? [['platform' => 'Engagement', 'url' => '']])),
+                accounts: [
+                    // Pre-fill with old or existing data if available, else empty example
+                    @if (old('issues_on_social_accounts'))
+                        @foreach (old('issues_on_social_accounts') as $platform => $url)
+                            {
+                                platform: '{{ $platform }}',
+                                url: '{{ $url }}'
+                            },
+                        @endforeach
+                    @elseif (isset($client) && $client->social_account_issues)
+                        @foreach ($client->social_account_issues as $platform => $url)
+                            {
+                                platform: '{{ $platform }}',
+                                url: '{{ $url }}'
+                            },
+                        @endforeach
+                    @else
+                        {
+                            platform: 'Engagement',
+                            url: ''
+                        }
+                    @endif
+                ],
+
                 addAccount() {
                     this.accounts.push({
                         platform: '',
                         url: ''
                     });
                 },
+
                 removeAccount(index) {
                     this.accounts.splice(index, 1);
                 }
@@ -262,13 +310,37 @@
 
         function websiteIssueManager() {
             return {
-                accounts: @json(old('issues_on_website', $client->website_issues ?? [['platform' => 'Hero Section', 'url' => '']])),
+                accounts: [
+                    // Pre-fill with old or existing data if available, else empty example
+                    @if (old('issues_on_website'))
+                        @foreach (old('issues_on_website') as $platform => $url)
+                            {
+                                platform: '{{ $platform }}',
+                                url: '{{ $url }}'
+                            },
+                        @endforeach
+                    @elseif (isset($client) && $client->website_issues)
+                        @foreach ($client->website_issues as $platform => $url)
+                            {
+                                platform: '{{ $platform }}',
+                                url: '{{ $url }}'
+                            },
+                        @endforeach
+                    @else
+                        {
+                            platform: 'Hero Section',
+                            url: ''
+                        }
+                    @endif
+                ],
+
                 addAccount() {
                     this.accounts.push({
                         platform: '',
                         url: ''
                     });
                 },
+
                 removeAccount(index) {
                     this.accounts.splice(index, 1);
                 }
