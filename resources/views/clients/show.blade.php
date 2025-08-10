@@ -151,7 +151,15 @@
                     <div class="{{ in_array($key, ['audit_summary', 'notes']) ? 'md:col-span-2' : '' }}">
                         <dt class="font-semibold text-gray-700 dark:text-gray-300">{{ $label }}</dt>
                         <dd class="mt-1 text-gray-900 dark:text-gray-100">
-                            @if (is_bool($client->$key) || $key === 'website_exists' || $key === 'social_accounts_exists')
+                            @if ($key === 'contact' && !empty($client->$key))
+                                <a href="tel:{{ $client->$key }}" class="text-blue-600 hover:underline">
+                                    {{ $client->$key }}
+                                </a>
+                            @elseif ($key === 'email' && !empty($client->$key))
+                                <a href="mailto:{{ $client->$key }}" class="text-blue-600 hover:underline">
+                                    {{ $client->$key }}
+                                </a>
+                            @elseif (is_bool($client->$key) || in_array($key, ['website_exists', 'social_accounts_exists']))
                                 {{ $client->$key ? 'Yes' : 'No' }}
                             @else
                                 {{ $client->$key ?? '-' }}
@@ -233,7 +241,7 @@
                     </dd>
                 </div>
 
-                 <div>
+                <div>
                     <dt class="font-semibold text-gray-700 dark:text-gray-300">Last Updated By</dt>
                     <dd class="mt-1 text-gray-500">
                         {{ $client->lastUpdatedBy ? $client->lastUpdatedBy->name : $client->addedBy->name }}
