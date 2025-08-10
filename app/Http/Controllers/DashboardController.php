@@ -12,9 +12,46 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Client::paginate(10);
+        $query = Client::query();
+
+        if ($request->business_name) {
+            $search = strtolower($request->business_name);
+
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(business_name) LIKE ?', ["{$search}%"])
+                    ->orWhereRaw('LOWER(business_name) LIKE ?', ["% {$search}%"]);
+            });
+        }
+
+        if ($request->business_owner) {
+            $search = strtolower($request->business_owner);
+
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(business_owner) LIKE ?', ["{$search}%"])
+                    ->orWhereRaw('LOWER(business_owner) LIKE ?', ["% {$search}%"]);
+            });
+        }
+
+        if ($request->type) {
+            $search = strtolower($request->type);
+
+            $query->where(function ($q) use ($search) {
+                $q->whereRaw('LOWER(type) LIKE ?', ["{$search}%"])
+                    ->orWhereRaw('LOWER(type) LIKE ?', ["% {$search}%"]);
+            });
+        }
+
+        if ($request->follow_up_dates) {
+            $query->where('follow_up_dates', '>=', $request->follow_up_dates);
+        }
+
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+
+        $data = $query->paginate(10);
         return view('clients.index', compact('data'));
     }
 
@@ -65,10 +102,10 @@ class DashboardController extends Controller
             'status'
         ]);
 
-        if($request->website_exists == 'on') {
+        if ($request->website_exists == 'on') {
             $data['website_exists'] = true;
         }
-        if($request->social_accounts_exists == 'on') {
+        if ($request->social_accounts_exists == 'on') {
             $data['social_accounts_exists'] = true;
         }
         $data['website_issues'] = $request->issues_on_website;
@@ -138,10 +175,10 @@ class DashboardController extends Controller
             'status'
         ]);
 
-        if($request->website_exists == 'on') {
+        if ($request->website_exists == 'on') {
             $data['website_exists'] = true;
         }
-        if($request->social_accounts_exists == 'on') {
+        if ($request->social_accounts_exists == 'on') {
             $data['social_accounts_exists'] = true;
         }
         $data['website_issues'] = $request->issues_on_website;

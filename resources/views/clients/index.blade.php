@@ -4,10 +4,23 @@
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 {{ __('Clients') }}
             </h2>
-            <a href="{{ route('clients.create') }}"
-                class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-white rounded-md">
-                Add New Client
-            </a>
+            <div class="flex gap-2">
+                <button @if (!request()->query()) disabled @endif
+                    onclick="if(window.location.search.length > 0) { window.location.href='{{ route('clients.index') }}'; }"
+                    class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-white rounded-md
+                        {{ !request()->query() ? 'opacity-50 cursor-not-allowed' : '' }}">
+                    Clear Filter
+                </button>
+
+                <button onclick="toggleFilterModal()"
+                    class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 text-white rounded-md">
+                    Filter
+                </button>
+                <a href="{{ route('clients.create') }}"
+                    class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-white rounded-md">
+                    Add New Client
+                </a>
+            </div>
         </div>
     </x-slot>
 
@@ -90,9 +103,16 @@
                                             //     2 => 'text-green-500',
                                             //     3 => 'text-red-500',
                                             // ];
-                                            $statusColors = ['text-gray-500', 'text-blue-500', 'text-orange-500', 'text-green-500', 'text-red-500'];
+                                            $statusColors = [
+                                                'text-gray-500',
+                                                'text-blue-500',
+                                                'text-orange-500',
+                                                'text-green-500',
+                                                'text-red-500',
+                                            ];
                                         @endphp
-                                        <span class="{{ $statusColors[$client->status ? $client->status - 1 : 0] ?? 'text-gray-500' }}">
+                                        <span
+                                            class="{{ $statusColors[$client->status ? $client->status - 1 : 0] ?? 'text-gray-500' }}">
                                             {{ ['Pending', 'In Progress', 'Waiting Client', 'Completed', 'Cancelled'][$client->status ? $client->status - 1 : 0] ?? 'Unknown' }}
                                         </span>
                                     </td>
@@ -122,5 +142,63 @@
                 </div>
             </div>
         </div>
+        <!-- Filter Modal -->
+        <div id="filterModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-md mx-auto p-6">
+                <h2 class="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Filter Clients</h2>
+
+                <form method="GET" action="{{ route('clients.index') }}" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Business Name</label>
+                        <input type="text" name="business_name" value="{{ request('business_name') }}"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Owner</label>
+                        <input type="text" name="business_owner" value="{{ request('business_owner') }}"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Type</label>
+                        <input type="text" name="type" value="{{ request('type') }}"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 dark:text-gray-300">Follow-up Date</label>
+                        <input type="date" name="follow_up_dates"
+                            value="{{ old('follow_up_dates') ?? today()->format('Y-m-d') }}"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
+                        <select name="status"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100">
+                            <option value="">-- Any --</option>
+                            <option value="1" {{ request('status') == 1 ? 'selected' : '' }}>Pending</option>
+                            <option value="2" {{ request('status') == 2 ? 'selected' : '' }}>In Progress</option>
+                            <option value="3" {{ request('status') == 3 ? 'selected' : '' }}>Waiting Client
+                            </option>
+                            <option value="4" {{ request('status') == 4 ? 'selected' : '' }}>Completed</option>
+                            <option value="5" {{ request('status') == 5 ? 'selected' : '' }}>Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="flex justify-end gap-2">
+                        <button type="button" onclick="toggleFilterModal()"
+                            class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-md">
+                            Cancel
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md">
+                            Apply
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <script>
+        function toggleFilterModal() {
+            document.getElementById('filterModal').classList.toggle('hidden');
+        }
+    </script>
 </x-app-layout>
