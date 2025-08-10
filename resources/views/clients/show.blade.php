@@ -220,7 +220,7 @@
                 @if ($client->location)
                     <div class="md:col-span-2">
                         <span class="font-semibold text-gray-700 dark:text-gray-300">Google Map:</span>
-                        <span class="whitespace-pre-wrap text-blue-600 dark:text-blue-400">
+                        <span class="text-blue-600 dark:text-blue-400">
                             <a href="{{ $client->location }}">Visit</a>
                         </span>
                     </div>
