@@ -46,7 +46,8 @@ class DashboardController extends Controller
             'notes' => 'nullable|string',
             'social_accounts' => 'nullable|array',
             'issues_on_website' => 'nullable|array',
-            'issues_on_social_accounts' => 'nullable|array'
+            'issues_on_social_accounts' => 'nullable|array',
+            'status' => 'nullable|in:Pending,In Progress,Waiting Client,Completed,Cancelled'
         ]);
 
         $data = $request->only([
@@ -60,7 +61,8 @@ class DashboardController extends Controller
             'social_accounts',
             'notes',
             'follow_up_dates',
-            'location'
+            'location',
+            'status'
         ]);
 
         if($request->website_exists == 'on') {
@@ -117,7 +119,8 @@ class DashboardController extends Controller
             'notes' => 'nullable|string',
             'social_accounts' => 'nullable|array',
             'issues_on_website' => 'nullable|array',
-            'issues_on_social_accounts' => 'nullable|array'
+            'issues_on_social_accounts' => 'nullable|array',
+            'status' => 'nullable|in:Pending,In Progress,Waiting Client,Completed,Cancelled'
         ]);
 
         $data = $request->only([
@@ -131,7 +134,8 @@ class DashboardController extends Controller
             'social_accounts',
             'notes',
             'follow_up_dates',
-            'location'
+            'location',
+            'status'
         ]);
 
         if($request->website_exists == 'on') {
