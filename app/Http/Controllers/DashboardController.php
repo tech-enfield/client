@@ -103,7 +103,7 @@ class DashboardController extends Controller
     public function update(Request $request, Client $client)
     {
         $validate = $request->validate([
-            'business_name' => 'required|string|unique:clients,business_name',
+            'business_name' => 'required|string|unique:clients,business_name,' . $client->id,
             'business_owner' => 'nullable|string',
             'email' => 'nullable|email',
             'contact' => 'nullable|regex:/^\+?\d[\d\- ]+$/',
