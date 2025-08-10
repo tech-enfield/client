@@ -54,52 +54,47 @@
                             @forelse($data as $client)
                                 <tr>
                                     <td
-                                            class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
-                                            {{ $client->business_name }}</td>
-                                        <td
-                                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
-                                            {{ $client->business_owner ?? '-' }}</td>
-                                        <td
-                                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
-                                            {{ $client->email ?? '-' }}</td>
-                                        <td
-                                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
-                                            {{ $client->contact ?? '-' }}</td>
-                                        <td
-                                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
-                                            {{ $client->type ?? '-' }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
-                                            @if ($client->website_exists && $client->website)
-                                                <a href="{{ $client->website }}" target="_blank"
-                                                    class="text-blue-600 hover:underline dark:text-blue-400">Yes</a>
-                                            @else
-                                                <span class="text-red-500">No</span>
-                                            @endif
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
-                                            @if ($client->social_accounts_exists)
-                                                <span class="text-green-600 dark:text-green-400">Yes</span>
-                                            @else
-                                                <span class="text-red-500">No</span>
-                                            @endif
-                                        </td>
-                                        <td
-                                            class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
-                                            {{ $client->follow_up_dates }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-center">
-                                            @php
-                                                $statusColors = [
-                                                    0 => 'text-gray-500',
-                                                    1 => 'text-yellow-500',
-                                                    2 => 'text-green-500',
-                                                    3 => 'text-red-500',
-                                                ];
-                                            @endphp
-                                            <span class="{{ $statusColors[$client->status] ?? 'text-gray-500' }}">
-                                                {{ ['Pending', 'In Progress', 'Completed', 'Cancelled'][$client->status] ?? 'Unknown' }}
-                                            </span>
-                                        </td>
+                                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">
+                                        {{ $client->business_name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                                        {{ $client->business_owner ?? '-' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                                        {{ $client->email ?? '-' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                                        {{ $client->contact ?? '-' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                                        {{ $client->type ?? '-' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                        @if ($client->website_exists && $client->website)
+                                            <a href="{{ $client->website }}" target="_blank"
+                                                class="text-blue-600 hover:underline dark:text-blue-400">Yes</a>
+                                        @else
+                                            <span class="text-red-500">No</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                        @if ($client->social_accounts_exists)
+                                            <span class="text-green-600 dark:text-green-400">Yes</span>
+                                        @else
+                                            <span class="text-red-500">No</span>
+                                        @endif
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                                        {{ $client->follow_up_dates }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                        @php
+                                            $statusColors = [
+                                                0 => 'text-gray-500',
+                                                1 => 'text-yellow-500',
+                                                2 => 'text-green-500',
+                                                3 => 'text-red-500',
+                                            ];
+                                        @endphp
+                                        <span class="{{ $statusColors[$client->status] ?? 'text-gray-500' }}">
+                                            {{ ['Pending', 'In Progress', 'Completed', 'Cancelled'][$client->status] ?? 'Unknown' }}
+                                        </span>
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
                                         <a href="{{ route('clients.show', $client->id) }}"
                                             class="text-green-600 hover:text-green-900 dark:hover:text-green-400">

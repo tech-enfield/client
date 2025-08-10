@@ -226,6 +226,20 @@
                     </div>
                 @endif
 
+                <div>
+                    <dt class="font-semibold text-gray-700 dark:text-gray-300">Added By</dt>
+                    <dd class="mt-1 text-gray-500">
+                        {{ $client->addedBy->name }}
+                    </dd>
+                </div>
+
+                 <div>
+                    <dt class="font-semibold text-gray-700 dark:text-gray-300">Last Updated By</dt>
+                    <dd class="mt-1 text-gray-500">
+                        {{ $client->lastUpdatedBy ? $client->lastUpdatedBy->name : $client->addedBy->name }}
+                    </dd>
+                </div>
+
                 {{-- Status --}}
                 <div>
                     <dt class="font-semibold text-gray-700 dark:text-gray-300">Status</dt>
