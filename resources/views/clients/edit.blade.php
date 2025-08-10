@@ -8,6 +8,18 @@
     <div class="py-8 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div
             class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900 dark:text-gray-100">
+
+            @if ($errors->any())
+                <div class="mb-4">
+                    <div class="font-medium text-red-600">{{ __('Whoops! Something went wrong.') }}</div>
+                    <ul class="mt-3 list-disc list-inside text-sm text-red-600">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form method="POST" action="{{ route('clients.update', $client->id) }}">
                 @csrf
                 @method('PUT')
