@@ -112,6 +112,15 @@
                     </div>
 
                     <div>
+                        <label class="block text-gray-700 dark:text-gray-300">Status</label>
+                        <input type="text" name="status" value="{{ old('status') ?? 'Pending' }}" placeholder="Pending"
+                            class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 focus:ring focus:ring-blue-300 focus:ring-opacity-50" />
+                        @error('status')
+                            <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
                         <label class="block text-gray-700 dark:text-gray-300">Social Media Accounts</label>
                         <div x-data="socialAccountsManager()" class="mb-4">
                             <template x-for="(account, index) in accounts" :key="index">
