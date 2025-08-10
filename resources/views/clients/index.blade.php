@@ -5,13 +5,17 @@
                 {{ __('Clients') }}
             </h2>
             <div class="flex gap-2">
-                <button @if (!request()->query()) disabled @endif
+                {{-- <button @if (!request()->query()) disabled @endif
                     onclick="if(window.location.search.length > 0) { window.location.href='{{ route('clients.index') }}'; }"
                     class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-white rounded-md
                         {{ !request()->query() ? 'opacity-50 cursor-not-allowed' : '' }}">
                     Clear Filter
+                </button> --}}
+                <button
+                    onclick="if(window.location.search.length > 0) { window.location.href='{{ route('clients.index') }}'; }"
+                    class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 text-white rounded-md">
+                    Clear Filter
                 </button>
-
                 <button onclick="toggleFilterModal()"
                     class="inline-flex items-center px-4 py-2 bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 text-white rounded-md">
                     Filter
