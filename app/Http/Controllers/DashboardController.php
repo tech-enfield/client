@@ -51,7 +51,7 @@ class DashboardController extends Controller
             $query->where('status', $request->status);
         }
 
-        $data = $query->paginate(10);
+        $data = $query->orderBy('business_name', 'asc')->paginate(10);
         return view('clients.index', compact('data'));
     }
 
